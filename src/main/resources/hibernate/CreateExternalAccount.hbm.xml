@@ -1,0 +1,121 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+
+	<class name="edu.asu.securebanking.model.ExternalAccount" table="external_user"
+		catalog="sundevilbankofasu">
+		<id name="userid" type="int">
+			<column name="user_id" />
+			<generator class="identity" />
+		</id>
+
+		<property name="firstname" type="string">
+			<column name="firstname" length="150" />
+		</property>
+
+		<property name="lastname" type="string">
+			<column name="lastname" length="150" />
+		</property>
+		<property name="username" type="string">
+			<column name="username" length="100" />
+		</property>
+
+		<property name="ssn" type="string">
+			<column name="ssn" length="11" />
+		</property>
+
+		<property name="password" type="string">
+			<column name="pwd" length="200" />
+		</property>
+
+		<property name="gender" type="string">
+			<column name="gender" length="6" />
+		</property>
+
+		<property name="dob" type="string">
+			<column name="dob" length="10" />
+		</property>
+
+		<property name="address" type="string">
+			<column name="address" length="200" />
+		</property>
+
+		<property name="email" type="string">
+			<column name="email" length="100" />
+		</property>
+
+		<property name="telephone" type="string">
+			<column name="phone_no" length="10" />
+		</property>
+
+		<property name="securityquestion" type="string">
+			<column name="security_question" length="150" />
+		</property>
+
+		<property name="securityanswer" type="string">
+			<column name="security_answer" length="150" />
+		</property>
+
+		<property name="firstTimeLogin" type="boolean">
+			<column name="first_time_login" />
+		</property>
+
+		<property name="currentBalance" type="double">
+			<column name="current_balance" />
+		</property>
+
+		<property name="accountNo" type="string">
+			<column name="account_no" length="15" />
+		</property>
+		
+		   <property name="authorized" type="boolean">
+            <column name="activated" />
+        </property>
+        
+        
+		   <property name="type" type="string">
+            <column name="type" length="45"/>
+        </property>
+
+	</class>
+
+	<query name="getallexternalusers">
+               <![CDATA[from ExternalAccount]]>
+	</query>
+
+	<query name="findexternaluser">
+               <![CDATA[from ExternalAccount i where i.userid = :userid]]>
+	</query>
+	
+	<query name="findexternaluserbyusername">
+               <![CDATA[from ExternalAccount i where i.username = :username]]>
+	</query>
+
+	
+		<query name="findexternaluseraccountnumber">
+               <![CDATA[from ExternalAccount i where i.accountNo = :accountNo]]>
+	</query>
+
+	<query name="findexternaluserbyssn">
+               <![CDATA[from ExternalAccount i where i.ssn = :ssn]]>
+	</query>
+	
+	<query name="findexternaluserbytelephone">
+               <![CDATA[from ExternalAccount i where i.telephone = :telephone]]>
+	</query>
+	
+	<query name="findexternaluserbyemail">
+               <![CDATA[from ExternalAccount i where i.email = :email]]>
+	</query>
+	
+
+
+	<query name="findpiireq">
+               <![CDATA[from ExternalAccount]]>
+
+	</query>
+
+
+</hibernate-mapping>

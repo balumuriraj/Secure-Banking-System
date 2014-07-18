@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+
+	<class name="edu.asu.securebanking.model.CreditcardRequests" table="creditcard_requests"
+		catalog="sundevilbankofasu">
+		
+		<id name="requestNo" type="int">
+			<column name="request_no" />
+			<generator class="identity" />
+		</id>
+
+		<property name="accountNo" type="string">
+			<column name="account_no" length="15" />
+		</property>
+		
+		<property name="approved" type="string">
+			<column name="approved" length="10" />
+		</property>
+
+	</class>
+
+	<query name="getallapprovedccrequests">
+               <![CDATA[from CreditcardRequests where approved = 'yes']]>
+	</query>
+	
+	<query name="approveccrequest">
+               <![CDATA[update CreditcardRequests set approved = :approved where accountNo = :accountNo]]>
+	</query>
+	
+	<query name="deleteccrequest">
+               <![CDATA[from CreditcardRequests where accountNo = :accountNo]]>
+	</query>
+
+
+</hibernate-mapping>

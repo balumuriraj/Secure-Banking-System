@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+http://www.springframework.org/schema/context
+http://www.springframework.org/schema/context/spring-context-3.0.xsd
+http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+	<context:annotation-config />
+	<mvc:annotation-driven></mvc:annotation-driven>
+
+	<import resource="classpath:spring/config/BeanLocations.xml" />
+
+	<context:component-scan base-package="edu.asu.securebanking.controller" />
+
+	<!-- To prevent browser's back button on displaying secured resource -->
+	<bean
+		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+		<property name="cacheSeconds" value="0" />
+	</bean>
+
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
+		
+	<bean class="edu.asu.securebanking.validator.ExternalUserValidator" />
+	<bean class="edu.asu.securebanking.validator.InternalUserValidator" />
+	<bean class="edu.asu.securebanking.validator.GenericValidator" />
+	<!-- Register the user.properties -->
+
+	<bean id="messageSource"
+		class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basename" value="locale\Users" />
+	</bean>
+
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+		<property name="viewClass"
+			value="org.springframework.web.servlet.view.JstlView" />
+		<property name="prefix" value="/WEB-INF/jsp/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+
+	<bean
+		class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+		<property name="exceptionMappings">
+			<props>
+				<prop key="edu.asu.securebanking.hibernateexception.InternalException">
+					error
+				</prop>
+			</props>
+		</property>
+		<property name="defaultErrorView" value="error1" />
+	</bean>
+
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url"
+			value="jdbc:mysql://localhost:3306/sundevilbankofasu" />
+		<property name="username" value="root" />
+		<property name="password" value="group2" />
+
+	</bean>
+
+
+	<mvc:view-controller path="/ExternalRegistration/Success"
+		view-name="accountCreationSuccess" />
+	<mvc:view-controller path="/InternalRegistration/Success"
+		view-name="accountCreationSuccess" />
+	<mvc:view-controller path="/Passkeyfailure"
+		view-name="passKeyFailure" />
+
+</beans>

@@ -1,0 +1,21 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+ 
+    <!-- CreateExternalAccount business object -->
+   <bean id="createExternalAccountBO" class="edu.asu.securebanking.businessobjectImpl.CreateExternalAccountBOImpl" >
+   		<property name="createExternalAccountDao" ref="createExternalAccountDao" />
+   </bean>
+ 
+   <!-- CreateExternalAccount Data Access Object -->
+   <bean id="createExternalAccountDao" class="edu.asu.securebanking.dataaccessobjectImpl.CreateExternalAccountDaoImpl" >
+   		<property name="sessionFactory" ref="sessionFactory"></property>
+   </bean>
+ 
+   <bean id="transactionManager" 
+    class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+  <property name="sessionFactory" ref="sessionFactory"></property>
+  </bean>
+</beans>
+

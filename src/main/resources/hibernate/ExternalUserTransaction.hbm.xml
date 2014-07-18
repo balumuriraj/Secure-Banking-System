@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+ 
+<hibernate-mapping>
+    <class name="edu.asu.securebanking.model.ExternalUserTransaction" table="external_user_transaction" catalog="sundevilbankofasu">
+        <id name="transId" type="int">
+            <column name="trans_id"/>
+            <generator class="identity" />
+        </id>
+        
+        <property name="userId" type="java.lang.Integer">
+            <column name="user_id"/>
+        </property>
+        
+        <property name="transType" type="string">
+            <column name="trans_type" length="200"/>
+        </property>
+        
+         <property name="transDetail" type="string">
+            <column name="trans_detail" length="255"/>
+        </property>
+        
+        <property name="amountInvolved" type="double">
+            <column name="amount_involved"/>
+        </property>
+        
+        <property name="status" type="string">
+            <column name="status" length="100"/>
+        </property>
+        
+        <property name="accessGranted" type="int">
+            <column name="access_granted" length="1"/>
+        </property>
+     
+    </class>
+</hibernate-mapping>

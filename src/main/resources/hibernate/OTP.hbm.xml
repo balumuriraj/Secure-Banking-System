@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+
+	<class name="edu.asu.securebanking.model.OTP" table="otp"
+		catalog="sundevilbankofasu">
+		<id name="pkey" type="java.lang.Integer">
+			<column name="pkey" />
+			<generator class="identity" />
+		</id>
+	
+		<property name="userid" type="java.lang.Integer">
+			<column name="user_id" />
+		</property>
+			
+		<property name="empid" type="java.lang.Integer">
+			<column name="emp_id" />
+		</property>
+
+		<property name="otp" type="string">
+			<column name="one_time_pwd" length="255" />
+		</property>
+		<property name="time" type="java.sql.Timestamp">
+			<column name="time_stamp"/>
+		</property>
+
+	</class>
+
+
+
+</hibernate-mapping>

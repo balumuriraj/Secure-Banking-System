@@ -1,0 +1,21 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+ 
+    <!-- CreateAccount business object -->
+   <bean id="ccRequestsBO" class="edu.asu.securebanking.businessobjectImpl.CreditcardRequestsBOImpl" >
+   		<property name="ccRequestsDao" ref="ccRequestsDao" />
+   </bean>
+ 
+   <!-- CreateAccount Data Access Object -->
+   <bean id="ccRequestsDao" class="edu.asu.securebanking.dataaccessobjectImpl.CreditcardRequestsDaoImpl" >
+   		<property name="sessionFactory" ref="sessionFactory"></property>
+   </bean>
+ 
+   <bean id="transactionManager" 
+    class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+  <property name="sessionFactory" ref="sessionFactory"></property>
+  </bean>
+
+</beans>

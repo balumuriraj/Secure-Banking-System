@@ -1,0 +1,21 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+ 
+    <!-- InternalUserTransaction business object -->
+   <bean id="internalUserTransactionBO" class="edu.asu.securebanking.businessobjectImpl.InternalUserTransactionBOImpl" >
+   		<property name="internalUserTransactionDao" ref="internalUserTransactionDao" />
+   </bean>
+ 
+   <!-- InternalUserTransaction Data Access Object -->
+   <bean id="internalUserTransactionDao" class="edu.asu.securebanking.dataaccessobjectImpl.InternalUserTransactionDaoImpl" >
+   		<property name="sessionFactory" ref="sessionFactory"></property>
+   </bean>
+ 
+   <bean id="transactionManager" 
+    class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+  <property name="sessionFactory" ref="sessionFactory"></property>
+  </bean>
+
+</beans>

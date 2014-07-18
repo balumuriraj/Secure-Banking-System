@@ -1,0 +1,26 @@
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+ 
+	<!-- Database & Hibernate Configuration -->
+	<import resource="../database/DataSource.xml"/>
+	<import resource="../database/Hibernate.xml"/>
+ 
+	<!-- Beans Declaration -->
+	<import resource="../beans/CreateExternalAccount.xml"/>
+	<import resource="../beans/CreateInternalAccount.xml"/>
+	<import resource="../beans/InternalUserTransaction.xml"/>
+	<import resource="../beans/ExternalUserTransaction.xml"/>
+	<import resource="../beans/InternalCriticalTransaction.xml"/>
+	<import resource="../beans/LoginAttempt.xml"/>
+	<import resource="../beans/PiiAuth.xml"/>
+    <import resource="../beans/IndividualUser.xml"/>
+    <import resource="../beans/Merchant.xml"/>
+    <import resource="../beans/CreditcardRequests.xml"/>
+    <import resource="../beans/PassKey.xml"/>
+    <import resource="../beans/OTP.xml"/>
+    <import resource="../beans/Pki.xml"/>
+
+</beans>

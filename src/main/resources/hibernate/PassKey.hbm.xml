@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+
+	<class name="edu.asu.securebanking.model.PassKey" table="passkey"
+		catalog="sundevilbankofasu">
+		<id name="passKey" type="string">
+			<column name="passkey" />
+			<generator class="identity" />
+		</id>
+		
+		<property name="accountType" type="boolean">
+			<column name="account_type"/>
+		</property>
+	</class>
+	
+	<query name="findpasskey">
+               <![CDATA[from PassKey where passkey = :passkey]]>
+	</query>
+	
+	
+	
+</hibernate-mapping>

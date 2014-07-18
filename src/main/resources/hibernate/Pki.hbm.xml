@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+
+	<class name="edu.asu.securebanking.model.Pki" table="certificate"
+		catalog="sundevilbankofasu">
+		
+		<id name="transId" type="string">
+			<column name="transId" length="45"/>
+			<generator class="assigned" />
+		</id>
+		
+		<property name="transDetail" type="string">
+			<column name="transDetail"/>
+		</property>
+		
+		<property name="userName" type="string">
+			<column name="user_name"/>
+		</property>
+		
+		<property name="merchant" type="string">
+			<column name="merchant"/>
+		</property>
+		
+		<property name="cert" type="blob">
+			<column name="certi"/>
+		</property>
+		
+		<property name ="amountInvolved" type="double">
+		    <column name="amount"/>
+		</property>
+		
+	<!--  	<property name="certificate" type="blob">
+			<column name="certificate"/>
+		</property> -->
+		
+		<query name="findPKIByTransId">
+               <![CDATA[from Pki i where i.transId = :transId]]>
+	</query>
+
+	</class>
+
+	
+
+</hibernate-mapping>

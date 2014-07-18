@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+
+	<class name="edu.asu.securebanking.model.PiiAuth"
+		table="pii_auth" catalog="sundevilbankofasu">
+		<id name="userid" type="int">
+			<column name="user_id" />
+		</id>
+
+		<property name="isauthorized" type="string">
+			<column name="isauthorized" length="45" />
+		</property>
+		
+		<property name="authrequest" type="string">
+			<column name="authrequest" length="45" />
+		</property>
+
+	</class>
+
+	<query name="getpiireq">
+               <![CDATA[from PiiAuth i where i.userid = :userid]]>
+	</query>
+	
+	<query name="getallpiireqs">
+               <![CDATA[from PiiAuth]]>
+	</query>
+	
+	<query name="updateauthorization">
+               <![CDATA[update PiiAuth set isauthorized = :isauthorized where userid = :userid]]>
+	</query>
+
+</hibernate-mapping>

@@ -1,0 +1,67 @@
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.springframework.org/schema/security
+	http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+
+	<http auto-config="true" use-expressions="true">
+		<intercept-url pattern="/welcome*" access="isAuthenticated()" />
+		<intercept-url pattern="/InternalRegistration*" access="permitAll" />
+		<intercept-url pattern="/ExternalRegistration*" access="permitAll" />
+		<intercept-url pattern="/PassKey*" access="permitAll" />
+		<intercept-url pattern="/error*" access="permitAll" />
+		<intercept-url pattern="/internalUserManagement*"
+			access="hasAnyRole('CEO', 'PRESIDENT', 'VICEPRESIDENT', 'MANAGER')" />
+		<intercept-url pattern="/externalUserManagement*"
+			access="hasAnyRole('CEO', 'PRESIDENT', 'VICEPRESIDENT')" />
+		<intercept-url pattern="/transactionManagement*"
+			access="hasAnyRole('EMPLOYEE','MANAGER')" />
+		<intercept-url pattern="/ITRegularEmployee*"
+			access="hasAnyRole('EMPLOYEE','MANAGER')" />
+		<intercept-url pattern="/transactionMonitoringEmployee*"
+			access="hasAnyRole('EMPLOYEE','MANAGER')" />
+		<intercept-url pattern="/externalUsersAccounts*"
+			access="hasAnyRole('EMPLOYEE','MANAGER')" />
+		<intercept-url pattern="/CompanyManagementEmployeeHomePage*"
+			access="hasAnyRole('EMPLOYEE','MANAGER')" />
+		<intercept-url pattern="/IndividualUser*" access="hasAnyRole('INDIVIDUAL')" />
+		<intercept-url pattern="/Merchant*" access="hasAnyRole('MERCHANT')" />
+		<intercept-url pattern="/SystemAdmin*" access="hasAnyRole('SYSADMIN')" />
+		<intercept-url pattern="/SecureOnlineBanking/SystemAdmin/internalUsersNewRequests*" access="hasAnyRole('SYSADMIN')" />
+		<intercept-url pattern="/SecureOnlineBanking/SystemAdmin/externalUsersNewRequests*" access="hasAnyRole('SYSADMIN')" />
+		<intercept-url pattern="/SecureOnlineBanking/SystemAdmin/addinternalaccount*" access="hasAnyRole('SYSADMIN')" />
+		<intercept-url pattern="/SecureOnlineBanking/SystemAdmin/viewLogs*" access="hasAnyRole('SYSADMIN')" />
+			<intercept-url pattern="/SecureOnlineBanking/SystemAdmin/addexternalaccount*" access="hasAnyRole('SYSADMIN')" />
+		
+
+		<form-login login-page="/login" default-target-url="/welcome"
+			authentication-failure-url="/loginfailed"  />
+		<logout logout-success-url="/logout" invalidate-session="true"
+			delete-cookies="true" />
+		<session-management invalid-session-url="/logout">
+			<concurrency-control max-sessions="2"
+				error-if-maximum-exceeded="true" />
+		</session-management>
+
+	</http>
+
+	<authentication-manager>
+		<authentication-provider>
+			<password-encoder hash="sha-256">
+			</password-encoder>
+			<jdbc-user-service data-source-ref="dataSource"
+				users-by-username-query='select username, pwd as password, activated as enabled from internal_user where username=?'
+				authorities-by-username-query='select username , position AS authority from internal_user where username = ?' />
+		</authentication-provider>
+		<authentication-provider>
+			<password-encoder hash="sha-256">
+			</password-encoder>
+			<jdbc-user-service data-source-ref="dataSource"
+				users-by-username-query='select username, pwd as password, activated as enabled from external_user where username=?'
+				authorities-by-username-query='select username , type AS authority from external_user where username = ?' />
+		</authentication-provider>
+
+	</authentication-manager>
+
+</beans:beans>

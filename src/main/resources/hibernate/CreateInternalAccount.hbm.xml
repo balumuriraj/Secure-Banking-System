@@ -1,0 +1,131 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+
+	<class name="edu.asu.securebanking.model.InternalAccount" table="internal_user"
+		catalog="sundevilbankofasu">
+		<id name="employeeId" type="int">
+
+			<column name="employee_id" />
+			<generator class="identity" />
+		</id>
+
+		<property name="firstname" type="string">
+			<column name="firstname" length="150" />
+		</property>
+
+		<property name="lastname" type="string">
+			<column name="lastname" length="150" />
+		</property>
+
+		<property name="username" type="string">
+			<column name="username" length="100" />
+		</property>
+
+		<property name="ssn" type="string">
+			<column name="ssn" length="11" />
+		</property>
+
+		<property name="password" type="string">
+			<column name="pwd" length="200" />
+		</property>
+
+		<property name="gender" type="string">
+			<column name="gender" length="6" />
+		</property>
+
+		<property name="dob" type="string">
+			<column name="dob" length="10" />
+		</property>
+
+		<property name="address" type="string">
+			<column name="address" length="200" />
+		</property>
+
+		<property name="email" type="string">
+			<column name="email" length="100" />
+		</property>
+
+		<property name="telephone" type="string">
+			<column name="phone_no" length="10" />
+		</property>
+
+		<property name="securityquestion" type="string">
+			<column name="security_question" length="150" />
+		</property>
+
+		<property name="securityanswer" type="string">
+			<column name="security_answer" length="150" />
+		</property>
+
+		
+		<property name="firstTimeLogin" type="boolean">
+			<column name="first_time_login" />
+		</property>
+
+
+		<property name="deptid" type="int">
+
+			<column name="dept_id" length="10" />
+		</property>
+
+		<property name="position" type="string">
+			<column name="position" length="100" />
+		</property>
+
+		<property name="salary" type="double">
+			<column name="salary" />
+		</property>
+		
+		  <property name="authorized" type="boolean">
+            <column name="activated" />
+        </property>
+
+	</class>
+
+
+	<query name="getallinternalusers">
+               <![CDATA[from InternalAccount]]>
+	</query>
+
+	<query name="findinternaluser">
+               <![CDATA[from InternalAccount i where i.employeeId = :employeeId]]>
+	</query>
+
+
+
+	<query name="findexternaluserbyid">
+               <![CDATA[from ExternalAccount i where i.userid = :userid]]>
+	</query>
+	<query name="transferinternaluser">
+               <![CDATA[update InternalAccount set deptid = :deptid where employeeId = :employeeId]]>
+	</query>
+	
+	<query name="updatesalary">
+               <![CDATA[update InternalAccount set salary = :salary where employeeId = :employeeId]]>
+	</query>
+
+	<query name="findinternaluserbyidanddeptid">
+               <![CDATA[from InternalAccount i where i.employeeId = :employeeId and deptid = :deptid]]>
+	</query>
+
+	<query name="findinternaluserbyusername">
+               <![CDATA[from InternalAccount i where i.username = :username]]>
+	</query>
+	
+	<query name="findinternaluserbyssn">
+               <![CDATA[from InternalAccount i where i.ssn = :ssn]]>
+	</query>
+	
+	<query name="findinternaluserbytelephone">
+               <![CDATA[from InternalAccount i where i.telephone = :telephone]]>
+	</query>
+	
+	<query name="findinternaluserbyemail">
+               <![CDATA[from InternalAccount i where i.email = :email]]>
+	</query>
+
+
+</hibernate-mapping>

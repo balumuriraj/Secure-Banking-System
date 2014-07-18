@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+ 
+<hibernate-mapping>
+    <class name="edu.asu.securebanking.model.InternalUserTransaction" table="internal_user_transaction" catalog="sundevilbankofasu">
+        <id name="transId" type="int">
+            <column name="trans_id"/>
+            <generator class="identity" />
+        </id>
+        
+        <property name="employeeId" type="java.lang.Integer">
+            <column name="emp_id"/>
+        </property>
+        
+        <property name="transType" type="string">
+            <column name="type" length="200"/>
+        </property>
+        
+         <property name="description" type="string">
+            <column name="description" length="255"/>
+        </property>
+        
+        <property name="status" type="string">
+            <column name="status" length="100"/>
+        </property>
+        
+        <property name="deptId" type="java.lang.Integer">
+            <column name="dept_id"/>
+        </property>
+     
+    </class>
+    
+     <query name="getallinternaltransaction">
+               <![CDATA[from InternalUserTransaction]]>
+    </query>
+    
+    
+     <query name="findinternaltransaction">
+               <![CDATA[from InternalUserTransaction i where i.transId = :transId]]>
+    </query>
+    
+
+     <query name="getallexternaltransaction">
+               <![CDATA[from ExternalUserTransaction]]>
+    </query>
+    
+    
+     <query name="findexternaltransaction">
+               <![CDATA[from ExternalUserTransaction i where i.transId = :transId]]>
+    </query>
+
+
+</hibernate-mapping>

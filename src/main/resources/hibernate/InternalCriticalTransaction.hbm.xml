@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+
+	<class name="edu.asu.securebanking.model.InternalCriticalTransaction"
+		table="internal_critical_transaction" catalog="sundevilbankofasu">
+		<id name="transId" type="int">
+
+			<column name="trans_id" />
+			<generator class="identity" />
+		</id>
+
+		<property name="request" type="string">
+			<column name="request" length="200" />
+		</property>
+
+		<property name="employeeId" type="int">
+			<column name="employee_id" length="11" />
+		</property>
+
+		<property name="deptid" type="int">
+			<column name="dept_id" length="11" />
+		</property>
+
+		<property name="ceoapp" type="string">
+			<column name="ceo_app" length="10" />
+		</property>
+
+		<property name="presapp" type="string">
+			<column name="pres_app" length="10" />
+		</property>
+
+		<property name="vpresapp" type="string">
+			<column name="vpres_app" length="10" />
+		</property>
+	</class>
+
+	<query name="getallcriticaltrans">
+               <![CDATA[from InternalCriticalTransaction]]>
+	</query>
+	
+	<query name="findcriticaluser">
+               <![CDATA[from InternalCriticalTransaction i where i.employeeId = :employeeId]]>
+    </query>
+    
+    <query name="updateinternalcriticaltransactionbyceo">
+               <![CDATA[update InternalCriticalTransaction set ceoapp = :ceoapp where employeeId = :employeeId]]>
+    </query>
+    
+    <query name="updateinternalcriticaltransactionbypres">
+               <![CDATA[update InternalCriticalTransaction set presapp = :presapp where employeeId = :employeeId]]>
+    </query>
+    
+    <query name="updateinternalcriticaltransactionbyvpres">
+               <![CDATA[update InternalCriticalTransaction set vpresapp = :vpresapp where employeeId = :employeeId]]>
+    </query>
+
+</hibernate-mapping>
